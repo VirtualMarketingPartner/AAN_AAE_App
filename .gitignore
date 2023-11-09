@@ -5,5 +5,8 @@
 .DS_Store
 *.Rproj
 
-data/
-Data/
+Data/county/*
+Data/place/*
+Data/tract/*
+Data/Supporting_Data/*
+Data/Supporting_Files/*
