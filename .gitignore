@@ -5,8 +5,10 @@
 .DS_Store
 *.Rproj
 
-Data/county/*
-Data/place/*
-Data/tract/*
+Data/county/*.RData
+Data/place/*/*.Rdata
+Data/tract/*/*.Rdata
 Data/Supporting_Data/*
-Data/Supporting_Files/*
+!Data/Supporting_Data/.gitkeep
+Data/Supporting_Files/*/*
+!Data/Supporting_Files/*/.gitkeep
