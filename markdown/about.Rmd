@@ -1,0 +1,399 @@
+---
+title: "The Asthma Equity Explorer Dashboard"
+output: 
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 4
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+> Explore how social determinants of health impact your community's asthma outcomes
+
+## Introduction
+
+Our [social determinants of health (SDOH)](https://health.gov/healthypeople/priority-areas/social-determinants-health)--- the conditions of the places in which we live, work, learn, worship, and play --- impact community-level asthma outcomes. The **Asthma Equity Explorer** is an interactive, population-level dashboard that applies health equity research to inform community-based asthma interventions within their unique SDOH landscapes.
+
+### Features of the Asthma Equity Explorer
+
+The Asthma Equity Explorer supports those working in asthma intervention and helps users understand, describe, and make data-informed decisions to address the drivers of asthma outcomes within their geographic context. It features:
+
+-   Multiple geographic levels to explore (state, county, & city)
+
+-   Interactive maps and data visualizations
+
+-   Guidance on how to understand and interpret the data
+
+-   Downloadable datasets and customized reports
+
+### How to use the Dashboard
+
+The dashboard page allows users to visualize the burden of asthma prevalence and risk factors at multiple geographic levels.
+
+-   **Geographic levels** -- Users select geographic levels to explore. The map hosts data at the census tract, city, county, state-level. Once this selection is made, sub-questions enable users to specify the geographic region displayed in the map.
+
+-   **Factors** -- Users select asthma-related social and environmental factors to display as shaded in the map. Hover over the information button to read more about the measure, or continue below to read more about the data sources used.
+
+-   **Asthma Prevalence** -- The map and scatter plot use round dots to visualize asthma prevalence. Increased dot size or color saturation indicate higher asthma prevalence.
+
+The maps, scatter plot, and data tables have cross interactivity. You can click on an area in the map to see it highlighted within the scatter plot as well as the data table. Use the scatter plot visual to understand how your selected area's position lays within the distribution among all other areas, or use the values from the data table to include in reports or for supplemental analysis.
+
+### Recommended Uses
+
+Local asthma programs, asthma researchers, health care leaders, and invested community may use the findings from the Asthma Equity Explorer Dashboard application to advance health equity efforts by:
+
+1.  Increasing health care providers' awareness about opportunities and barriers for patients' improving asthma-related health outcomes to improve health care services.
+2.  Identifying geographic regions with greater unmet Asthma health needs to inform prioritized populations and tailored strategies for future interventions.
+3.  Strengthen evidence of historic racial inequities associated with current health disparities accelerate health equity strategies across topic areas.
+4.  Create tailored public health social media campaigns by using the map feature to inform priority areas for location-based marketing in asthma program awareness campaigns or to help segment different campaigns to address populations with different needs.
+5.  Collaborate with local agencies and organizations to increase impact by using the downloadable reports to send to local organizations (i.e., housing authorities, nonprofits, community programs) to help describe the impacts of social risk factors on asthma prevalence.
+
+## Data Sources
+
+The Asthma Health Equity Dashboard hosts aggregated data collected from seven publicly available data sources. This section provides an overview of seven data sources, a summary of hosted datasets, descriptions of all dashboard variables and a list of additional resources for further Asthma equity-related exploration.
+
+-   [Data Source Overview](#data-source-overview)
+
+-   [Dataset Descriptions](#dataset-descriptions)
+
+-   [Variable Descriptions](#variable-descriptions)
+
+-   [Additional Resources](#additional-resources)
+
+### Data Source Overview {#data-source-overview}
+
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| Source                                                 | Name                                                       | Content Description                                                                                                                   | Year      | Geographic Levels           |
++========================================================+============================================================+=======================================================================================================================================+===========+=============================+
+| Census.gov                                             | American Community Survey (ACS)                            | Population Demographic information, Socioeconomic Features                                                                            | 2021      | Census Tract, County, Place |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| Centers for Disease Control and Prevention (CDC)       | Population Level Analysis and Community Estimates (PLACES) | Self reported health measures categorized by health outcomes, prevention and unhealthy behaviors modeled from BRFSS data              | 2020      | Census Tract, County, Place |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| Atmospheric Composition Analysis Group (ACAG)          | EPA Particulate Matter                                     | Annual particulate matter 2.5 concentrations in micrograms per cubic meter from EPA's air quality system (AQS); modeled and monitored | 2018      | Census Tract, County, Place |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| U.S. Department of Housing and Urban Development (HUD) | Comprehensive Housing Affordability Strategy (CHAS)        | Housing Stress                                                                                                                        | 2019      | Census Tract, County, Place |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| U.S. Department of Agriculture (USDA)                  | Food Access Research Atlas                                 | Access to Healthy Foods                                                                                                               | 2019      | Census Tract, County, Place |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+| University of Richmond                                 | Mapping Inequality Redlining                               | Home Owners' Loan Corporation (HOLC) grades in 138 US cities                                                                          | 1935-1940 | Census Tract, Place         |
++--------------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+-----------+-----------------------------+
+
+### Dataset Descriptions {#dataset-descriptions .tabset .tabset-fade}
+
+This section provides website links, data collection year, geographic levels, and notes describing the data sets used.
+
+#### ACS
+
+**American Community Survey (ACS)**
+
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [Homepage](https://www.census.gov/programs-surveys/acs)                                                                                                                                                                                                                                                                                                                                                                                               |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | [Design and Methodology](https://www.census.gov/programs-surveys/acs/methodology/design-and-methodology.html)                                                                                                                                                                                                                                                                                                                                         |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | 2021 Data Release (2017-2021 5-year estimate)                                                                                                                                                                                                                                                                                                                                                                                                         |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | Census Tract, County, Place                                                                                                                                                                                                                                                                                                                                                                                                                           |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | The American Community Survey (ACS) is an ongoing survey conducted by the U.S. Census Bureau that provides vital information on a yearly basis about our nation and its people. It uses a series of monthly samples to produce annually updated estimates for the same small areas (census tracts and block groups) formerly surveyed via the decennial census long-form sample. Five years of samples are required to produce these small-area data. |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             | Accessed through the "tidycensus" package in R.                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | Useful links:                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://www.census.gov/programs-surveys/acs/guidance/handbooks/general.html](https://www.census.gov/programs-surveys/acs/guidance/handbooks/general.html%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                  |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://api.census.gov/data/2021/acs/acs5/variables.html](https://api.census.gov/data/2019/acs/acs5/variables.html%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                                                        |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://www.census.gov/data/developers/data-sets.html](https://www.census.gov/data/developers/data-sets.html%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                                                              |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://www.census.gov/glossary/](https://www.census.gov/glossary/%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                                                                                                        |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://www.census.gov/programs-surveys/acs/guidance/estimates.html](https://www.census.gov/programs-surveys/acs/guidance/estimates.html%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                                  |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                   | -   [https://walker-data.com/tidycensus/articles/basic-usage.html](https://walker-data.com/tidycensus/articles/basic-usage.html%22%20%5Ct%20%22_blank)                                                                                                                                                                                                                                                                                                |
++-------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#### PLACES
+
+**Population Level Analysis and Community Estimates (PLACES)**
+
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [Homepage](https://www.cdc.gov/places/about/index.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|                   | [Measure definitions](https://www.cdc.gov/places/measure-definitions/index.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | Data sources used to generate these model-based estimates include Behavioral Risk Factor Surveillance System (BRFSS) 2020 or 2019 data, Census Bureau 2020 or 2019 county population estimate data, and American Community Survey 2016--2020 or 2015--2019 estimates.                                                                                                                                                                                                                                                                                                  |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | county, places (incorporated and census designated places), census tract, and ZIP Code Tabulation Area (ZCTA)                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | Model-based population estimates. 3,142 counties within 50 states and District of Columbia (DC), including 9 county and city consolidated cities. 28,484 of 29,321 Places or Census Designated Places (CDP) with a population of 50 or more from Census Tiger 2019 Places and CDPs based on the Census 2010 population count. 72,337 of 73,057 census tracts in the 50 states and Washington, DC that have a Census 2010 population of 50 or more people. 32,409 of 32,989 ZCTAs in the 50 states and Washington, DC with Census 2010 population of 50 or more people. |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             | Relies on BRFSS and only includes adults \>= 18 years of age                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#### PM 2.5
+
+**Particulate Matter 2.5**
+
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [Surface PM2.5 \| Atmospheric Composition Analysis Group \| Washington University in St. Louis (wustl.edu)](https://sites.wustl.edu/acag/datasets/surface-pm2-5/)                                                                                                                                                                                              |
+|                   |                                                                                                                                                                                                                                                                                                                                                                |
+|                   | [ACAGPM R Package](https://github.com/mitre/ACAGPM)                                                                                                                                                                                                                                                                                                            |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | 2018                                                                                                                                                                                                                                                                                                                                                           |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | Census Tract, County, Place                                                                                                                                                                                                                                                                                                                                    |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | Estimate annual and monthly ground-level fine particulate matter (PM~2.5~) for 1998-2021 by combining Aerosol Optical Depth (AOD) retrievals from the NASA MODIS, MISR, and SeaWIFS instruments with the GEOS-Chem chemical transport model, and subsequently calibrating to global ground-based observations using a Geographically Weighted Regression (GWR) |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             | Census-Tract level processed data                                                                                                                                                                                                                                                                                                                              |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#### HUD
+
+**Comprehensive Housing Affordability Strategy (CHAS) - HUD**
+
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [Consolidated Planning/CHAS Data \| HUD USER](https://www.huduser.gov/portal/datasets/cp.html)                                                                                                                                                                                                                                                                                                                                                                                                       |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | 2015-2019 5-year average data                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | Census Tract, County, Place                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | Each year, the U.S. Department of Housing and Urban Development (HUD) receives custom tabulations of American Community Survey (ACS) data from the U.S. Census Bureau. These data, known as the "CHAS" data (Comprehensive Housing Affordability Strategy), demonstrate the extent of housing problems and housing needs, particularly for low income households. The CHAS data are used by local governments to plan how to spend HUD funds, and may also be used by HUD to distribute grant funds. |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#### USDA
+
+**Food Access Research Atlas from Economic Research Service (ERS) - USDA**
+
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [USDA ERS - Download the Data](https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/)                                                                                                                                                   |
+|                   |                                                                                                                                                                                                                                                                        |
+|                   | [USDA ERS - Documentation](https://www.ers.usda.gov/data-products/food-access-research-atlas/documentation/)                                                                                                                                                           |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | 2019                                                                                                                                                                                                                                                                   |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | Census Tract, County, Place                                                                                                                                                                                                                                            |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | Estimates in the Atlas for 2019 are based on a 2019 list of supermarkets, the 2010 Decennial Census, and the 2014-18 American Community Survey (ACS). The estimates for 2015 are based on a 2015 list of supermarkets, the 2010 Decennial Census, and the 2010-14 ACS. |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             |                                                                                                                                                                                                                                                                        |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+#### Redlining
+
+**Redlining**
+
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Link              | [Homepage](https://dsl.richmond.edu/panorama/redlining/#loc=5/39.1/-94.58&text=downloads)                                                                                                                                                          |
+|                   |                                                                                                                                                                                                                                                    |
+|                   | Citation: Robert K. Nelson, LaDale Winling, Richard Marciano, Nathan Connolly, et al., "Mapping Inequality," American Panorama, ed. Robert K. Nelson and Edward L. Ayers, accessed January 8, 2021, <https://dsl.richmond.edu/panorama/redlining/> |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Year              | 1935-1940                                                                                                                                                                                                                                          |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Geographic Levels | HOLC block (historical neighborhood)                                                                                                                                                                                                               |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sample            | 196 cities in 38 US states                                                                                                                                                                                                                         |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Notes             | HOLC grades are mapped to census tracts in the given cities for all analyses                                                                                                                                                                       |
++-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### Variable Descriptions {#variable-descriptions .tabset .tabset-fade}
+
+This table provides variable names and descriptions organized by data source for each of the variables included in the Asthma Equity Explorer Dashboard.
+
+#### ACS
+
+**American Community Survey**
+
+Population Composition
+
+-   `B03002_001E` Estimate!! Total
+
+-   `B03002_002E` Estimate!!Total!!Not Hispanic or Latino
+
+-   `B03002_003E` Estimate!!Total!!Not Hispanic or Latino!!White alone
+
+-   `B03002_004E` Estimate!!Total!!Not Hispanic or Latino!!Black or African American alone
+
+-   `B03002_005E` Estimate!!Total!!Not Hispanic or Latino!!American Indian and Alaska Native alone
+
+-   `B03002_006E` Estimate!!Total!!Not Hispanic or Latino!!Asian alone
+
+-   `B03002_007E` Estimate!!Total!!Not Hispanic or Latino!!Native Hawaiian and Other Pacific Islander alone
+
+-   `B03002_008E` Estimate!!Total!!Not Hispanic or Latino!!Some Other Race alone
+
+-   `B03002_009E` Estimate!!Total!!Not Hispanic or Latino!!Two or more races
+
+-   `B03002_012E` Estimate!!Total!!Hispanic or Latino
+
+Labor and Employment
+
+-   `S2301_C04_001E` Estimate!!Unemployment rate!!Population 16 years and over
+
+-   `C18120_002E` Labor force
+
+-   `C18120_001E` Total for labor force calculation
+
+Education Measures
+
+-   `B06009_001E` Estimate!!Total
+
+-   `B06009_002E` Estimate!!Total!!Less than high school graduate
+
+-   `B06009_003E` Estimate!!Total!!High school graduate (includes equivalency)
+
+-   `B06009_004E` Estimate!!Total!!Some college or associate's degree
+
+-   `B06009_005E` Estimate!!Total!!Bachelor's degree
+
+-   `B06009_006E` Estimate!!Total!!Graduate or professional degree
+
+Income/Poverty Measures
+
+-   `B06011_001E` Estimate!!Median income in the past 12 months!!Total
+
+-   `B05010_001E` Estimate!!Total
+
+-   `B05010_002E` Estimate!!Total:!!Under 1.00:
+
+-   `B05010_010E` Estimate!!Total:!!1.00 to 1.99:
+
+ICE Variables (Race Ethnicity and Income)
+
+-   `B19001_001` Estimate total household income in the past 12 months (in 2010 inflation-adjusted dollars)
+
+-   `B19001_002` Estimate total less than \$10,000 in household income in the past 12 months (in 2010 inflation-adjusted dollars)
+
+-   `B19001_003` Estimate total \$10,000 to \$14,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars)
+
+-   `B19001_004` Estimate total \$15,000 to \$19,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars)
+
+-   `B19001_005` Estimate total \$20,000 to \$24,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars)
+
+-   `B19001H_002` Estimate total less than \$10,000 in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_003` Estimate total \$10,000 to \$14,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_004` Estimate total \$15,000 to \$19,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_005` Estimate total \$20,000 to \$24,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_015` Estimate total \$125,000 to \$149,999 household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_016` Estimate total \$150,000 to \$199,999 in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+-   `B19001H_017` Estimate total \$200,000 or more in household income in the past 12 months (in 2010 inflation-adjusted dollars) (white alone, not hispanic or latino householder)
+
+ICE Variables (Rent/Own)
+
+-   `B25003_001` Estimate total occupied housing units
+
+-   `B25003_002` Estimate total owned occupied housing units
+
+-   `B25003_003` Estimate total rented occupied housing units
+
+------------------------------------------------------------------------
+
+#### PLACES
+
+**Population Level Analysis and Community Estimates**
+
+-   `CASTHMA` Weighted number of respondents who answer "yes" both to both of the following questions: "Have you ever been told by a doctor, nurse, or other health professional that you have asthma?" and the question "Do you still have asthma?"
+
+-   `CSMOKING` Respondents aged ≥18 years who report having smoked ≥100 cigarettes in their lifetime and currently smoke every day or some days.
+
+-   `OBESITY` Respondents aged ≥18 years who have a body mass index (BMI) ≥30.0 kg/m² calculated from self-reported weight and height. Exclude the following:
+
+    -   Height: data from respondents measuring \<3 ft or ≥8 ft
+
+    -   Weight: data from respondents weighing \<50 lbs or ≥650 lbs
+
+    -   BMI: data from respondents with BMI \<12 kg/m2 ≥100 kg/m2
+
+    -   Pregnant women
+
+-   `COPD` Respondents aged ≥18 years who report ever having been told by a doctor, nurse, or other health professional that they had chronic obstructive pulmonary disease (COPD), emphysema, or chronic bronchitis
+
+-   `ACCESS2` Respondents aged 18--64 years who report having no current health insurance coverage.
+
+-   `BPHIGH` Respondents aged ≥18 years who report ever having been told by a doctor, nurse, or other health professional that they have high blood pressure. Women who were told high blood pressure only during pregnancy and those who were told they had borderline hypertension were not included
+
+------------------------------------------------------------------------
+
+#### PM 2.5
+
+**Particulate Matter 2.5**
+
+-   `Tract.Value_EPA`: Three year annual average ambient concentrations of PM2.5 in micrograms per cubic meter (based on seasonal averages and daily measurement) at the tract level
+
+-   `County.Value_EPA`: Three annual average ambient concentrations of PM2.5 in micrograms per cubic meter (based on seasonal averages and daily measurement) at the county level
+
+------------------------------------------------------------------------
+
+#### HUD
+
+**Comprehensive Housing Affordability Strategy (CHAS) - HUD**
+
+-   `T1_est2` Owner Occupied - All
+
+-   `T1_est3` Owner Occupied - has 1 or more of the 4 housing unit problems (lacks kitchen or plumbing, more than 1 person per room, or cost burden greater than 30%)
+
+-   `T1_est75` Renter Occupied - All
+
+-   `T1_est76` Renter Occupied - has 1 or more of the 4 housing unit problems (lacks kitchen or plumbing, more than 1 person per room, or cost burden greater than 30%)
+
+------------------------------------------------------------------------
+
+#### USDA
+
+**Food Access Research Atlas from Economic Research Service (ERS) - USDA**
+
+-   `LAPOP1_10` Low access, population at 1 mile for urban areas and 10 miles for rural areas, number (Population count beyond 1 mile for urban areas or 10 miles for rural areas from supermarket)
+
+## FAQ
+
+### What are Census Places Geography?
+
+In this tool, the "Places" geography level refers to ["Census Designated Places"](https://www.census.gov/programs-surveys/bas/information/cdp.html) as defined by the U.S. Census Bureau.
+
+The Places selection uses all Metropolitan places (urban area with \>50,000 population) within a state. If a state does not have at least 10 Metropolitan areas, then Micropolitan places (urban areas with between 10,000 - 50,000 population) are included to back fill as many as able.
+
+### What is the Index of Concentration at the Extremes?
+
+The Index of Concentration at the Extremes is a spatial social polarization. It is a measure which has been supported for [use in public health monitoring](https://www.researchgate.net/publication/287797226_Public_Health_Monitoring_of_Privilege_and_Deprivation_With_the_Index_of_Concentration_at_the_Extremes) by public health researchers, and has been shown to have have links to several health outcomes including [pre-term birth and infant mortality](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6458187/), [hypertension](https://www.jstor.org/stable/44017648#metadata_info_tab_contents), [breast cancer](https://link.springer.com/article/10.1007/s10552-016-0793-7), and [black carbon exposure](https://www.sciencedirect.com/science/article/pii/S135382921500074X).
+
+This measure is calculated two ways for 1) Race/Ethnicity by Income and 2) Rent/Own.
+
+1)  Race/Ethnicity by Income: For each Census Tract or County, calculate the difference between the number of High Income (\>\$125K Household Income) Non-Hispanic White residents and Low Income (\<\$25K Household Income) Non-White residents, and divide that by the Total Population in that area.
+
+2)  Rent/Own: For each Census Tract or County, calculate the difference between the number of Homeowners and the number of Renters, and divide that by the Total Population in the area.
+
+These measures are then re-scaled between 0 and 100, such that:
+
+1)  A score near 100 indicates an area with high concentrations of High Income Non-Hispanic White residents, a score near 0 indicates an area of Low Income Non-White residents, and a score near 50 indicates an area with similar concentrations of both populations.
+
+2)  A score near 100 indicates an area with high concentrations of home owners, a score near 0 indicates an area with high concentrations of renters, and a score near 50 indicates an area with similar concentrations of both populations.
+
+### How is Rank defined?
+
+The table, map, and scatter plot all contain a Rank element, which is intended to help identify high-priority areas when considering both the selected factor and Asthma Prevalence.
+
+The Rank is determined by first taking the rank of Asthma Prevalence for all geographic units, then taking the rank of the selected factor for all geographic units (while considering the directionality of the factor), then averaging them (using the mean), and then taking the rank of the average. The population size of the geographic unit is used to break ties. Note, Race/Ethnicity factors aren't ranked, their corresponding geographies are ranked solely by their Asthma Prevalence.
+
+## Contact Info
+
+For additional questions, feedback, or information about the Asthma Equity Explorer Dashboard, please contact:
+
+-   [research\@allergyasthmanetwork.org](mailto:research@allergyasthmanetwork.org){.email} with "Asthma Equity Explorer" in the Subject Line
+
+MITRE Technology Applied. This system incorporates elements of the software developed by The MITRE Corporation on behalf of the U.S. Government.

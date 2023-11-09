@@ -1,0 +1,259 @@
+---
+title: "Asthma Equity Explorer Report"
+params:
+  geo_name: NA
+  num_geo: NA
+  factor: NA
+  map_path: NA
+  map_rank_path: NA
+  scatter_path: NA
+  scatter_rank_path: NA
+  data_table: NA
+  hist_factor: NA
+  hist_asthma: NA
+  factor_units: NA
+  geo_unit: NA
+  factor_def: NA
+  interpret_info: NA
+  dat_info: NA
+  factor_og_name: NA
+  selection_sentence: NA
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library(ggplot2)
+library(stringr)
+
+report_date <- Sys.time()
+
+geo_title <- params$geo_name
+num_geo <- params$num_geo
+factor <- params$factor
+map <- params$map_path
+map_rank <- params$map_rank_path
+scatter <- params$scatter_path
+scatter_rank <- params$scatter_rank_path
+data_table <- params$data_table
+factor_units <- params$factor_units
+geo_unit <- params$geo_unit
+factor_def <- params$factor_def
+interpret_info <- params$interpret_info
+dat_info <- params$dat_info
+selection_sentence <- params$selection_sentence
+asthma_available <- params$asthma_available
+
+geo_unit_singular <- if (geo_unit == "counties") {
+  "county"
+} else { "tract"}
+
+colnames(data_table) <- str_remove_all(colnames(data_table), "<br>") %>%
+  str_trim()
+
+factor_header <- colnames(data_table)[
+  stri_detect_fixed(tolower(str_trim(colnames(data_table))), 
+          tolower(str_trim(factor)))
+  ]
+asthma_header <- colnames(data_table)[
+  str_detect(tolower(colnames(data_table)), 
+          "asthma")
+  ]
+
+
+```
+
+The Asthma Equity Explorer is an interactive tool intended to help asthma programs, researchers, and community members understand the relationships between the Social Determinants of Health (SDOH) and asthma prevalence within our communities.
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+formatted_def = str_replace_all(factor_def$Definition[1], "<br>", "\n \n \n>    ")
+```
+
+
+## Report Summary
+
+Report generated on: `r report_date`
+
+`r selection_sentence`
+
+`r str_trim(factor)`:
+
+>    *Group:* `r factor_def$Group[1]`
+    
+>    *Source:* `r factor_def$Source[1]`
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+
+cat(paste0(">    *Definition:* ", formatted_def))
+
+```
+
+Model Outcome:
+
+> `r interpret_info`
+
+## Figures
+
+The figures shown below are meant to serve as a visual tool for understanding the geographic and population distributions of `r str_trim(factor)` and Asthma Prevalence, as well as any trends between them. They serve to visually describe the relationship between these two factors, and can help illuminate areas where there are high or low associations between them.
+
+
+![Map - `r str_trim(factor)`](`r map`)
+
+![Map - Rank](`r map_rank`)
+
+The `r str_trim(factor)` map shows **`r str_trim(factor)` (`r factor_units`)** for all `r geo_unit` in `r geo_title` as a color gradient overlay. **Asthma Prevalence (percent)** is shown as grey circles over the center of all `r geo_unit`, where the larger, darker circles represent higher asthma prevalence and the smaller, lighter circles represent lower asthma prevalence. The Rank map shows the the combined rank between asthma prevalence and `r str_trim(factor)` for all `r geo_unit` in `r geo_title` as a red gradient overlay, where the darker red corresponds to a higher rank (closer to 1) and a lighter color corresponds to a lower rank. See the Data Table section for more details on how rank is defined.
+
+
+![Scatter Plot - `r str_trim(factor)`](`r scatter`)
+
+![Scatter Plot - Rank](`r scatter_rank`)
+
+The `r str_trim(factor)` scatter plot shows **`r str_trim(factor)` (`r factor_units`)** versus **Asthma Prevalence (percent)** for all `r geo_unit` in `r geo_title`, where each `r geo_unit_singular` is represented as a colored circle. The size of the circle corresponds to the population density (population per square mile) in that `r geo_unit_singular`, where larger circles represent higher population density and smaller circles represent lower population density. The dashed line bisecting the plot represents the line of best fit resulting from a linear regression of Asthma Prevalence (response variable) based on `r str_trim(factor)` (explanatory variable) for `r geo_unit` in `r geo_title`. The Rank scatter plot shows the combined rank between asthma prevalence and `r str_trim(factor)` for all `r geo_unit` in `r geo_title` as a red gradient overlay, where the darker red corresponds to a higher rank (closer to 1) and a lighter color corresponds to a lower rank. See the Data Table section for more details on how rank is defined.
+
+\pagebreak
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Summary Statistics for factor and asthma prevalence
+factor_dat <- data_table[[factor_header]]
+asthma_dat <- data_table[[asthma_header]]
+
+# Function to create a data frame of summary statistics
+create_metrics <- function(dat, name) {
+  
+  # Calculate information
+  dat_mean = mean(dat, na.rm = T)
+  dat_median = median(dat, na.rm = T)
+  dat_max = max(dat, na.rm = T)
+  dat_min = min(dat, na.rm = T)
+  dat_quantiles = quantile(dat, na.rm = T)
+  names(dat_quantiles) <- NULL
+  
+  # Put together
+  summary_dat <- c(
+      "Min" = dat_min,
+      "1st Qu." = dat_quantiles[2],
+      "Median" = dat_median,
+      "Mean" = dat_mean,
+      "3rd Qu." = dat_quantiles[4],
+      "Max" = dat_max
+    )
+  
+  # Convert to data frame
+  final_dat <- data.frame(
+      name = summary_dat,
+      check.names = FALSE
+    ) %>% 
+    dplyr::mutate_all(~round(., 3))
+  
+  # Set row and column names
+  colnames(final_dat) <- name
+  row.names(final_dat) <- names(summary_dat)
+  
+  return(
+    final_dat %>% 
+    tibble::rownames_to_column(var = "Metric")
+  )
+}
+
+# Convert to flextable
+bind_cols(
+    create_metrics(factor_dat, factor_header),
+    create_metrics(asthma_dat, asthma_header) %>% dplyr::select(-Metric)
+  ) %>%
+  flextable::flextable() %>%
+  flextable::width(
+    width = 3.25,
+    unit = "cm"
+  ) %>%
+  flextable::align(
+    align = "center",
+    part = "all"
+  ) %>%
+  flextable::bold(
+    bold = TRUE,
+    part = "all",
+    j = 1) %>%
+  flextable::align(
+    align = "right",
+    part = "all",
+    j = 1
+  ) %>%
+  flextable::set_caption("Summary Statistics")
+```
+
+The summary statistics provide high level characteristics of the distributions of Asthma Prevalence and `r str_trim(factor)` for all `r geo_unit` in `r geo_title`. The mean Asthma Prevalence (percent) is `r round(mean(asthma_dat, na.rm = T), 3)` and the mean `r str_trim(factor)` (`r factor_units`) is `r round(mean(factor_dat, na.rm = T), 3)`. The histograms below, along with their overlaid density curves, provide further visualizations of these distributions, giving the shape and size of the data.
+
+![`r factor` Distribution](`r params$hist_factor`)
+
+![Asthma Prevalence Distribution](`r params$hist_asthma`)
+
+\pagebreak
+
+## Data Table {#table_section}
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# assigns order based on variable
+cov_order <- dat_info[dat_info$Colname == params$factor_og_name,"Rank.Cardinality"]
+
+cov_pos_neg <- 
+  if (cov_order == "increasing") {
+    "negative"
+  } else {
+    "positive"
+  }
+
+cov_order <- 
+  if (cov_order == "increasing") {
+    "decreasing"
+  } else {
+    "increasing"
+  }
+```
+
+
+The following table lists the Asthma Prevalence (percent) and `r str_trim(factor)` (`r factor_units`) for every `r geo_unit_singular` in `r geo_title`. The table is sorted by the Rank score. The Rank is determined by first taking the rank of Asthma Prevalence for all geographic units, then taking the rank of `r str_trim(factor)` for all geographic units (since higher `r str_trim(factor)` corresponds to a `r cov_pos_neg` outcome, the rank is in _`r cov_order`_ order), then averaging them (using the mean), and then taking the rank of the average. The population size of the geographic unit is used to break ties. Note, Race/Ethnicity factors aren't ranked, their corresponding geographies are ranked solely by their Asthma Prevalence.
+
+<br>
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+# Trim whitespace
+# colnames(data_table) <- str_trim(colnames(data_table))
+# 
+# # Identify columns that we need to append units to
+# cols_to_change <- c(which(str_detect(colnames(data_table), "Asthma")),
+#                     which(str_detect(colnames(data_table), str_trim(factor))))
+# 
+# # Append units
+# colnames(data_table)[cols_to_change] <-
+#   paste0(colnames(data_table)[cols_to_change], c(" (percent)", paste0(" (", factor_units, ")")))
+
+# The GEOID number an empty column name, which is not
+# allowed
+if (any(colnames(data_table) == "")) {
+  colnames(data_table)[which(colnames(data_table) == "")] <- "GEOID"
+}
+
+# Print table
+data_table %>%
+  arrange(Rank) %>%
+  flextable::flextable() %>%
+  flextable::width(
+    width = 3.25,
+    unit = "cm"
+  ) %>%
+  flextable::align(
+    align = "center",
+    part = "header"
+  ) %>%
+  flextable::bold(
+    bold = TRUE,
+    part = "header")
+
+```
+
