@@ -128,9 +128,13 @@ ui <-
     "Asthma Equity Explorer",
     
     tags$html(lang="en"),
+    # Beta version tag -----
+    tags$script(HTML("var header = $('.navbar > .container-fluid');
+header.append('<div class = \"navbar-header\" style=\"padding-top:12px;float:right;color:grey\"><span>Beta Version</span></div>');
+    console.log(header)")
+    ),
     
     # Explore tab ----
-    
     tabPanel(
       title = div("Explore", class="explore"),
       class="explore-panel",
@@ -186,7 +190,7 @@ ui <-
                         column(
                           align = "center",
                           width = 2,
-                          p(HTML("<b>Choose Color Palette:</b>"),
+                          p(HTML("<b>Change from Rank to Factor:</b>"),
                             popify(
                               shiny_iconlink(),
                               title = NULL,
