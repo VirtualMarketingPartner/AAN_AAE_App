@@ -159,7 +159,17 @@ get_acs_info <- function(level = c("state", "county", "tract", "place"),
       labor.force.part.rate = labor.force/total.labor.force*100,
       
       # Nonwhite calculation
-      nonwhite_acs = pop_acs - nonhis.white_acs
+      nonwhite_acs = (pop_acs - nonhis.white_acs) / pop_acs * 100,
+      nonhis.pop_acs = nonhis.pop_acs / pop_acs * 100,
+      nonhis.white_acs = nonhis.white_acs / pop_acs * 100,
+      nonhis.black_acs = nonhis.black_acs / pop_acs * 100,
+      nonhis.american.indian_acs = nonhis.american.indian_acs / pop_acs * 100,
+      nonhis.asian_acs = nonhis.asian_acs / pop_acs * 100,
+      nonhis.pacific.islander_acs = nonhis.pacific.islander_acs / pop_acs * 100,
+      nonhis.other_acs = nonhis.other_acs / pop_acs * 100,
+      nonhis.two_acs = nonhis.two_acs / pop_acs * 100,
+      hispanic_acs = hispanic_acs / pop_acs * 100
+
     ) %>%
     dplyr::select(
       # Drop unnecessary variables
