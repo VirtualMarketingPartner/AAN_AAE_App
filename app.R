@@ -521,7 +521,9 @@ server <- function(input, output, session){
         "state",
         "Which state would you like to view?",
         choices = new_places,
-        selected = "AL"
+        selected = if (input$state == "") {
+          "AL"
+        } else { input$state }
       )
     }else{
       updateSelectInput(
@@ -529,7 +531,9 @@ server <- function(input, output, session){
         "state",
         "Which state would you like to view?",
         choices = all_placess,
-        selected = "AL"
+        selected = if (input$state == "") {
+          "AL"
+        } else { input$state }
       )
     }
   })
@@ -538,7 +542,7 @@ server <- function(input, output, session){
   observeEvent(geo_listener(), {
     if (input$geo_level == "State (County level data)"){
       # state needs nothing updated -- in for clarity
-      
+      print('here')
     } else if (input$geo_level == "County (Census-tract level data)"){
       # counties need to be updated for selected state
       cty_log <- grepl(paste0("_", input$state), avail_data[["County (Census-tract level data)"]])
@@ -579,16 +583,16 @@ server <- function(input, output, session){
   # avail geographies update factors and cache data
   observeEvent(county_listener(), {
     # don't update if we haven't selected it
+        state_selection <- if (input$state == "") {
+          "AL"
+        } else { input$state }
     if (input$geo_level == "State (County level data)"){
       # load the selected data
       if (input$state %in% names(data_cache[["State (County level data)"]])){
         # we already have the data cached
         geo_dat(data_cache[["State (County level data)"]][[input$state]])
       } else {
-        
-        state_selection <- if (input$state == "") {
-          "AL"
-        } else { input$state }
+
         
         # we need to load and add data to cache
         load(
@@ -600,10 +604,22 @@ server <- function(input, output, session){
         )
         data_cache[["State (County level data)"]][[state_selection]] <<- geo_shp_dat
         geo_dat(data_cache[["State (County level data)"]][[state_selection]])
-        
+
         # keep track of what we've cached (level///name)
         cache_queue(c(cache_queue(), 
                       paste0(input$geo_level, "///", state_selection)))
+      }
+      if (sum(! is.na(geo_dat()$dat$CASTHMA_CrudePrev_BRFSS)) == 0 & input$state != '') {
+        show_alert(
+          title = NULL,
+          text = paste0(
+            col_to_pretty[mod_outcome], " data is not available for ",
+            input$state, 
+            ". Only factor data will be displayed."
+          ),
+          type = "info",
+          btn_colors = "#005B94"
+        )
       }
       if (!(mod_outcome %in% colnames(geo_dat()$dat))) {
         show_alert(
