@@ -1379,8 +1379,7 @@ write_explanation <- function(all_data, cov, outcome, geo_name, geo_unit, highli
       )
     )
   }
-  
-  if (!(outcome %in% colnames(all_data))) {
+  if (!(outcome %in% colnames(all_data)) | sum(! is.na(all_data$CASTHMA_CrudePrev_BRFSS)) == 0) {
     return(
       c(
         NA,

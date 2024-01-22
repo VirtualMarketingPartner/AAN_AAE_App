@@ -131,13 +131,17 @@ for (state in states) {
                                              "Greater Bridgeport",
                                              "Lower Connecticut River Valley",
                                              "Naugatuck Valley",
-                                             "Northeastern Connecticut"
+                                             "Northeastern Connecticut",
+                                             "Northwest Hills",
+                                             "South Central Connecticut",
+                                             "Southeastern Connecticut",
+                                             "Western Connecticut"
                                              )){
       return()
     }
-    else if (state == "CT"){
-      return()
-    }
+    # else if (state == "CT"){
+    #   return()
+    # }
 ####    
     
     
@@ -264,6 +268,7 @@ for (state in states) {
       places_tracts = places_tracts,
       cl = clust
     )
+    # lapply(places,save_place_rds,stateFP,places_tracts)
     toc()
     
     print(paste0("All ", state, " place data saved", Sys.time()))
