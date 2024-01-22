@@ -130,7 +130,7 @@ ui <-
     tags$html(lang="en"),
     # Beta version tag -----
     tags$script(HTML("var header = $('.navbar > .container-fluid');
-header.append('<div class = \"navbar-header\" style=\"padding-top:12px;float:right;color:grey\"><span>Beta Version</span></div>');
+header.append('<div class = \"navbar-header\" style=\"padding-top:12px;float:right;color:white\"><span>Beta Version</span></div>');
     console.log(header)")
     ),
     
