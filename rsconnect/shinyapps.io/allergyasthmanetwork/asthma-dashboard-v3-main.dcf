@@ -5,7 +5,7 @@ account: allergyasthmanetwork
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10107176
-bundleId: 7770497
+bundleId: 9394414
 url: https://allergyasthmanetwork.shinyapps.io/asthma-dashboard-v3-main/
 version: 1
 asMultiple: FALSE
